@@ -18,6 +18,9 @@ def print_bot_output(message, color=utils.bcolors.OKBLUE):
     if "image" in message:
         utils.print_color("Image: " + message.get("image"), color)
 
+    if "audio" in message:
+        utils.print_color("Audio: " + message.get("audio"), color)
+
     if "attachment" in message:
         utils.print_color("Attachment: " + message.get("attachment"), color)
 

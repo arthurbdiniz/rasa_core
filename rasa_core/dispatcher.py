@@ -15,7 +15,7 @@ if typing.TYPE_CHECKING:
 
 class Element(dict):
     __acceptable_keys = ['title', 'item_url', 'image_url',
-                         'subtitle', 'buttons']
+                         'audio_url', 'subtitle', 'buttons']
 
     def __init__(self, *args, **kwargs):
         kwargs = {key: value
@@ -96,6 +96,7 @@ class Dispatcher(object):
 
         self.latest_bot_messages.append(bot_message)
         self.output_channel.send_image_url(self.sender_id, attachment)
+        self.output_channel.send_audio_url(self.sender_id, attachment)
 
     # TODO: deprecate this function
     def utter_button_template(self,

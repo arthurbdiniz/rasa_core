@@ -245,6 +245,9 @@ def format_bot_output(
     data = message.get("data", {})
     if data.get("image"):
         output += "\nImage: " + data.get("image")
+    
+    if data.get("audio"):
+        output += "\nAudio: " + data.get("audio")
 
     if data.get("attachment"):
         output += "\nAttachment: " + data.get("attachment")

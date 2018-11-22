@@ -29,6 +29,9 @@ class TelegramOutput(Bot, OutputChannel):
     def send_image_url(self, recipient_id, image_url):
         self.send_photo(recipient_id, image_url)
 
+    def send_audio_url(self, recipient_id, audio_url):
+        self.send_audio(recipient_id, audio_url)
+
     def send_text_with_buttons(self, recipient_id, text,
                                buttons, button_type="inline", **kwargs):
         """Sends a message with keyboard.

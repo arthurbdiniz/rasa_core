@@ -32,6 +32,9 @@ def nlg_response_format_spec():
             },
             "image": {
                 "type": ["string", "null"]
+            },
+            "audio": {
+                "type": ["string", "null"]
             }
         },
     }

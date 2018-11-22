@@ -128,6 +128,10 @@ class OutputChannel(object):
         # if there is an image we handle it separately as an attachment
         if message.get("image"):
             self.send_image_url(recipient_id, message.get("image"))
+        
+        # if there is an audio we handle it separately as an attachment
+        if message.get("audio"):
+            self.send_audio_url(recipient_id, message.get("audio"))
 
         if message.get("attachment"):
             self.send_attachment(recipient_id, message.get("attachment"))
@@ -142,6 +146,11 @@ class OutputChannel(object):
         """Sends an image. Default will just post the url as a string."""
 
         self.send_text_message(recipient_id, "Image: {}".format(image_url))
+    
+    def send_audio_url(self, recipient_id: Text, audio_url: Text) -> None:
+        """Sends an audio. Default will just post the url as a string."""
+
+        self.send_text_message(recipient_id, "Audio: {}".format(audio_url))
 
     def send_attachment(self, recipient_id: Text, attachment: Text) -> None:
         """Sends an attachment. Default will just post as a string."""
@@ -194,6 +203,7 @@ class CollectingOutputChannel(OutputChannel):
     def _message(recipient_id,
                  text=None,
                  image=None,
+                 audio=None,
                  buttons=None,
                  attachment=None):
         """Create a message object that will be stored."""
@@ -202,6 +212,7 @@ class CollectingOutputChannel(OutputChannel):
             "recipient_id": recipient_id,
             "text": text,
             "image": image,
+            "audio": audio,
             "buttons": buttons,
             "attachment": attachment
         }
@@ -233,6 +244,12 @@ class CollectingOutputChannel(OutputChannel):
 
         self._persist_message(self._message(recipient_id,
                                             image=image_url))
+    
+    def send_audio_url(self, recipient_id: Text, audio_url: Text) -> None:
+        """Sends an audio. Default will just post the url as a string."""
+
+        self._persist_message(self._message(recipient_id,
+                                            audio=audio_url))
 
     def send_attachment(self, recipient_id: Text, attachment: Text) -> None:
         """Sends an attachment. Default will just post as a string."""
